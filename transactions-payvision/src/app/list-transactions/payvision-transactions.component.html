@@ -1,1 +1,53 @@
-list transactions
+<h3>
+  Welcome to {{title}}!
+</h3>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+    <div class="col-md-3 col-xs-1 text-left">
+      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+    </div>
+    <div class="col-md-9 col-xs-11 text-right">
+      <div class="btn-group" dropdown>
+        <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-autoclose1">
+          {{transactionTypeDropDownSelected.name}}
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-autoclose1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-autoclose1">
+          <li *ngFor="let type of transactionsTypeDropDown" (click)="transactionTypeDropDownSelected = type">
+            <a class="dropdown-item">{{type.name}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="btn-group" dropdown>
+        <button id="button-autoclose2" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-autoclose2">
+          {{currencyTypeDropDownSelected.name}}
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-autoclose2" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-autoclose2">
+          <li *ngFor="let type of currenciesTypeDropDown" (click)="currencyTypeDropDownSelected = type">
+            <a class="dropdown-item">{{type.name}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <button type="button" class="btn btn-success">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </button>
+    </div>
+</div>
+
+
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+  <div class="panel-footer">Panel footer</div>
+</div>
+
+
+
+
