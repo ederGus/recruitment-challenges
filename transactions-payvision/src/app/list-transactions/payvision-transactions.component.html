@@ -43,7 +43,63 @@
 
   </div>
   <div class="panel-body">
-    Panel content
+    <div class="table-responsive">
+      <table class="table  table-hover ">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Last 4 digits</th>
+            <th scope="col">Transaction type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Currency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr *ngIf="idTransactionToShow === '1'">
+            <td colspan="6">
+              <div class="list-group">
+                <a href="#" class="list-group-item disabled">
+                  Cras justo odio
+                </a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              </div>
+          </td>
+          </tr>
+          <!-- <accordion>
+            <accordion-group heading="Static Header, initially expanded">
+              This content is straight in the template.
+            </accordion-group>
+          </accordion>
+          </tr> -->
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
   <div class="panel-footer">Panel footer</div>
 </div>
