@@ -4,10 +4,6 @@ body {
   padding-top: 70px;
 }
 
-blockquote {
-  order-left: 5px solid #1db9de !important;
-}
-
 @-moz-document url-prefix() {
   fieldset {
     display: table-cell;
