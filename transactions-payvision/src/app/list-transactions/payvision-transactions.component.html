@@ -68,7 +68,7 @@
         <tbody  *ngFor="let transaction of transactions">
           <tr (click)="unCollapseRow(transaction)">
             <td>{{transaction.card.holderName}}</td>
-            <td>{{'todo'}}</td>
+            <td></td>
             <td>{{'XXXX ' + transaction.card.lastFourDigits}}</td>
             <td>{{transaction.action}}</td>
             <td>{{transaction.amount}}</td>
