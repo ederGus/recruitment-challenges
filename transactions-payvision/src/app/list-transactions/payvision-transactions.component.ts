@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 
-
+import { Transaction } from '../models/transaction';
 import { DropDown } from '../models/dropdown';
 import { TransactionType } from '../models/enums/transactionType';
 import { CurrencyType } from '../models/enums/currencyType';
 import { TransactionService } from './payvision-trasaction.service';
+import { Filter } from '../models/filter';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'payvision-transactions',
   templateUrl: './payvision-transactions.component.html',
+  styleUrls: ['./payvision-transaction.component.css'],
   providers: [TransactionService]
 })
 export class TransactionComponent {
@@ -19,6 +21,8 @@ export class TransactionComponent {
   currenciesTypeDropDown: DropDown[] = [];
   currencyTypeDropDownSelected: DropDown;
   idTransactionToShow = '';
+  transactions: Transaction[] = [];
+  filter: Filter = new Filter('' , '');
 
   constructor(private transactionService: TransactionService) {}
 
@@ -26,21 +30,27 @@ export class TransactionComponent {
   ngOnInit() {
     this.populateTransactionTypeDropdown();
     this.populateCurrencyType();
-    this.transactionService.getTransacions()
+    this.getTransactions();
+  }
+
+  getTransactions() {
+    this.transactions = [];
+    this.updateFilter();
+    this.transactionService
+      .getTransacions(this.filter)
       .then(data => {
-        console.log('data');
-       console.log(data);
+        this.transactions = data;
       })
       .catch((error: any) => {
+        console.log('error');
         console.log(error);
-       console.log(error);
       });
   }
 
-  // sample(data: number) {
-  //   debugger;
-  //   console.log("in");
-  // }
+  unCollapseRow(transaction: Transaction) {
+    this.idTransactionToShow = transaction.id;
+  }
+
 
   private populateCurrencyType() {
     this.currenciesTypeDropDown.push(
@@ -64,5 +74,18 @@ export class TransactionComponent {
       new DropDown(3, TransactionType.payment)
     );
     this.transactionTypeDropDownSelected = this.transactionsTypeDropDown[0];
+  }
+
+  private updateFilter() {
+    if (this.currencyTypeDropDownSelected.id !== 0) {
+      this.filter.currency = this.currencyTypeDropDownSelected.name.toString();
+    } else {
+      this.filter.currency = '';
+    }
+    if (this.transactionTypeDropDownSelected.id !== 0) {
+      this.filter.transactionType = this.transactionTypeDropDownSelected.name;
+    } else {
+      this.filter.transactionType = '';
+    }
   }
 }

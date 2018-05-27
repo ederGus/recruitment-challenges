@@ -1,0 +1,18 @@
+.label-more-detail{
+  color: #909ec7
+}
+
+.content-more-detail{
+  color:#4a4a4a
+}
+
+.show-message {
+  display: none;
+}
+
+
+@media (max-width: 767px) {
+  .show-message{
+     display: block;
+  }
+}

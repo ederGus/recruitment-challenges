@@ -2,48 +2,51 @@
   Welcome to {{title}}!
 </h3>
 
-
 <div class="panel panel-default">
   <div class="panel-heading">
-    <div class="row">
-    <div class="col-md-3 col-xs-1 text-left">
-      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-    </div>
-    <div class="col-md-9 col-xs-11 text-right">
-      <div class="btn-group" dropdown>
-        <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-autoclose1">
-          {{transactionTypeDropDownSelected.name}}
-          <span class="caret"></span>
-        </button>
-        <ul id="dropdown-autoclose1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-autoclose1">
-          <li *ngFor="let type of transactionsTypeDropDown" (click)="transactionTypeDropDownSelected = type">
-            <a class="dropdown-item">{{type.name}}</a>
-          </li>
-        </ul>
+      <div class="row">
+        <div class="col-md-3 col-xs-1 text-left">
+          <span class="glyphicon glyphicon-th-list btn-lg" aria-hidden="true"></span>
+        </div>
+        <div class="col-md-9 col-xs-11 text-right">
+          <div class="btn-group" dropdown>
+            <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-autoclose1">
+              {{transactionTypeDropDownSelected.name}}
+              <span class="caret"></span>
+            </button>
+            <ul id="dropdown-autoclose1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-autoclose1">
+              <li *ngFor="let type of transactionsTypeDropDown" (click)="transactionTypeDropDownSelected = type; getTransactions()">
+                <a class="dropdown-item">{{type.name}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="btn-group" dropdown>
+            <button id="button-autoclose2" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-autoclose2">
+              {{currencyTypeDropDownSelected.name}}
+              <span class="caret"></span>
+            </button>
+            <ul id="dropdown-autoclose2" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-autoclose2">
+              <li *ngFor="let type of currenciesTypeDropDown" (click)="currencyTypeDropDownSelected = type; getTransactions()">
+                <a class="dropdown-item">{{type.name}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <button type="button" class="btn btn-success" disabled>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
-
-      <div class="btn-group" dropdown>
-        <button id="button-autoclose2" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-autoclose2">
-          {{currencyTypeDropDownSelected.name}}
-          <span class="caret"></span>
-        </button>
-        <ul id="dropdown-autoclose2" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-autoclose2">
-          <li *ngFor="let type of currenciesTypeDropDown" (click)="currencyTypeDropDownSelected = type">
-            <a class="dropdown-item">{{type.name}}</a>
-          </li>
-        </ul>
-      </div>
-
-      <button type="button" class="btn btn-success">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-      </button>
-    </div>
-</div>
-
-
   </div>
   <div class="panel-body">
-    <div class="table-responsive">
+
+    <div class="table-responsive" *ngIf="transactions.length > 0">
+      <div class="row">
+        <div class="col-md-12">
+            <span class="label label-default show-message">Scroll left and right.</span>
+        </div>
+      </div>
       <table class="table  table-hover ">
         <thead>
           <tr>
@@ -55,53 +58,94 @@
             <th scope="col">Currency</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+        <tbody  *ngFor="let transaction of transactions">
+          <tr (click)="unCollapseRow(transaction)">
+            <td>{{transaction.card.holderName}}</td>
+            <td>{{'todo'}}</td>
+            <td>{{'XXXX ' + transaction.card.lastFourDigits}}</td>
+            <td>{{transaction.action}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.currencyCode}}</td>
           </tr>
-          <tr *ngIf="idTransactionToShow === '1'">
+          <tr *ngIf="idTransactionToShow === transaction.id">
             <td colspan="6">
               <div class="list-group">
-                <a href="#" class="list-group-item disabled">
-                  Cras justo odio
-                </a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <span href="#" class="list-group-item disabled">
+                  More details({{transaction.card.holderName}})
+                </span>
+                <div class="container-fluid list-group-item">
+                  <div class="col-md-6 col-xs-12">
+                      <div class="col-md-12">
+                        <div class="col-md-3">
+                          <span class="label-more-detail">ID</span>
+                        </div>
+                        <div class="col-md-9">
+                          <span class="content-more-detail">{{transaction.id}}</span>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                          <div class="col-md-3">
+                            <span class="label-more-detail">Tracking code</span>
+                          </div>
+                        <div class="col-md-9">
+                          <span class="content-more-detail">{{transaction.trackingCode}}</span>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                          <div class="col-md-3">
+                            <span class="label-more-detail">Brand ID</span>
+                          </div>
+                        <div class="col-md-9">
+                          <span class="content-more-detail">{{transaction.brandId}}</span>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-xs-12">
+                    <div class="col-md-12">
+                      <div class="col-md-3">
+                          <span class="label-more-detail">First 6 digits</span>
+                          </div>
+                        <div class="col-md-9">
+                          <span class="content-more-detail">{{transaction.card.firstSixDigits}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="col-md-3">
+                            <span class="label-more-detail">Expiry month</span>
+                          </div>
+                        <div class="col-md-9">
+                          <span class="content-more-detail">{{transaction.card.expiryMonth}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="col-md-3">
+                            <span class="label-more-detail">Expiry year</span>
+                          </div>
+                        <div class="col-md-9">
+                          <span class="content-more-detail">{{transaction.card.expiryYear}}</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
               </div>
           </td>
-          </tr>
-          <!-- <accordion>
-            <accordion-group heading="Static Header, initially expanded">
-              This content is straight in the template.
-            </accordion-group>
-          </accordion>
-          </tr> -->
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
           </tr>
         </tbody>
       </table>
     </div>
 
+    <div class="text-center" *ngIf="transactions.length === 0">
+      <h3>
+        <span class="label label-info">No result found</span>
+      </h3>
+    </div>
+
   </div>
-  <div class="panel-footer">Panel footer</div>
+  <div class="panel-footer text-right">
+    <h4>
+      <span class="label label-info">Total rows: {{transactions.length}}</span>
+    </h4>
+  </div>
 </div>
 
 
