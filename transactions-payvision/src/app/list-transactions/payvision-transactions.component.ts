@@ -23,6 +23,7 @@ export class TransactionComponent {
   idTransactionToShow = '';
   transactions: Transaction[] = [];
   filter: Filter = new Filter('' , '');
+  isLoading = false;
 
   constructor(private transactionService: TransactionService) {}
 
@@ -34,16 +35,19 @@ export class TransactionComponent {
   }
 
   getTransactions() {
+    this.isLoading = true;
     this.transactions = [];
     this.updateFilter();
     this.transactionService
       .getTransacions(this.filter)
       .then(data => {
         this.transactions = data;
+        this.isLoading = false;
       })
       .catch((error: any) => {
         console.log('error');
         console.log(error);
+        this.isLoading = false;
       });
   }
 

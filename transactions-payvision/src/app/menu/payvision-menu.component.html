@@ -13,9 +13,12 @@
     <div class="collapse navbar-collapse" [ngClass]="{ 'in': isNavbarCollapsed }" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
-            <a routerLink="/home">Home
-              <span class="sr-only">(current)</span>
+            <a routerLink="/home" routerLinkActive="active-link" (click)="isNavbarCollapsed = !isNavbarCollapsed">Home
             </a>
+        </li>
+        <li class="active" routerLinkActive="active-link" >
+          <a routerLink="/readme" (click)="isNavbarCollapsed = !isNavbarCollapsed">Readme
+          </a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

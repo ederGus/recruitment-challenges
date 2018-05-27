@@ -13,6 +13,7 @@ import { HomeComponent } from './home/payvision-home.component';
 import { MenuComponent } from './menu/payvision-menu.component';
 import { TransactionComponent } from './list-transactions/payvision-transactions.component';
 import { CommonModule } from '@angular/common';
+import { ReadmeComponent } from './readme/payvision-readme.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     MenuComponent,
-    TransactionComponent
+    TransactionComponent,
+    ReadmeComponent
   ],
   bootstrap: [AppComponent],
   exports: [TranslateModule]
