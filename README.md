@@ -1,16 +1,27 @@
-# Hi there! Welcome to Payvision Recruitment Challenges
-First of all, thank to be interested in Payvision. If you are here, could be for only two reasons. **First**, you are in the middle of the hiring process and you have to resolve the challenge. **Second**, you love coding. In both cases, we want to here more about you. 
+# TransactionsPayvision
 
-## Ground Rules
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
-We prefer well-thought-out solutions over the quick-and-dirty kind. So take your time, if you need it. A rushed job is usually matched by a swift rejection. Average completion time so far has been around one week. Submission is done via e-mail sending it to [jobs.spain@payvision.com](mailto:jobs.spain@payvision.com)
+## Development server
 
-## Challenges
-Below, you will find the link to the different challenges. Each of them are a different brach, so clone the repository, choose the branch that you want and resolve it. Good luck!
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-* [Software Engineer / .NET](https://github.com/payvision-development/recruitment-challenges/tree/software-engineer-dotnet)
-* [Software Engineer / JS](https://github.com/payvision-development/recruitment-challenges/tree/software-engineer-js)
-* [Frontend Software Engineer](https://github.com/payvision-development/recruitment-challenges/tree/frontend-engineer)
-* [Fullstack Software Engineer](https://github.com/payvision-development/recruitment-challenges/tree/fullstack-engineer)
-* [Test Automation Engineer](https://github.com/payvision-development/recruitment-challenges/tree/qa-engineer)
- 
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
